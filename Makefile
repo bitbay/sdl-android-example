@@ -25,6 +25,14 @@ else
 NDK_VERBOSE:=
 endif
 
+.PHONY: android
+android: android-update-project android-copy-assets android-uninstall
+	@echo "===> NDK [native build]"
+	$(Q)cd $(ANDROID_PROJECT) && ndk-build $(NDK_VERBOSE)
+	@echo "===> ANT [java build]"
+	$(Q)cd $(ANDROID_PROJECT) && ant $(ANT_TARGET)
+	$(Q)cd $(ANDROID_PROJECT) && ant $(ANT_INSTALL_TARGET)
+
 .PHONY: clean-android
 clean-android:
 	@echo "===> ANDROID [clean project]"
@@ -46,14 +54,6 @@ android-copy-assets:
 	@echo "===> CP [copy assets]"
 	$(Q)mkdir -p $(ANDROID_PROJECT)/assets
 	$(Q)cp -r data $(ANDROID_PROJECT)/assets
-
-.PHONY: android
-android: android-update-project android-copy-assets android-uninstall
-	@echo "===> NDK [native build]"
-	$(Q)cd $(ANDROID_PROJECT) && ndk-build $(NDK_VERBOSE)
-	@echo "===> ANT [java build]"
-	$(Q)cd $(ANDROID_PROJECT) && ant $(ANT_TARGET)
-	$(Q)cd $(ANDROID_PROJECT) && ant $(ANT_INSTALL_TARGET)
 
 android-backtrace:
 	adb logcat | ndk-stack -sym $(ANDROID_PROJECT)/obj/local/armeabi
