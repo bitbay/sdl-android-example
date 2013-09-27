@@ -59,4 +59,4 @@ android-backtrace:
 	adb logcat | ndk-stack -sym $(ANDROID_PROJECT)/obj/local/armeabi
 
 android-uninstall:
-	$(Q)cd $(ANDROID_PROJECT) && ant uninstall
+	#$(Q)cd $(ANDROID_PROJECT) && ant uninstall

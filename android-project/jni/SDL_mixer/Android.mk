@@ -22,8 +22,8 @@ SMPEG_LIBRARY_PATH := external/smpeg2-2.0.0
 # Enable this if you want to support loading OGG Vorbis music via Tremor
 # The library path should be a relative path to this directory.
 SUPPORT_OGG := true
-OGG_LIBRARY_PATH := ../libogg-1.3.1
-VORBIS_LIBRARY_PATH := ../libvorbisidec-1.2.1
+OGG_LIBRARY_PATH := external/libogg-1.3.1
+VORBIS_LIBRARY_PATH := external/libvorbisidec-1.2.1
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)
