@@ -12,7 +12,7 @@ SDL_NET_PATH := ../SDL_net
 NAME := myawesomegame
 
 LOCAL_SRC_FILES := \
-	MyAwesomeGame.cpp \
+	$(subst jni/src/,,$(wildcard jni/src/*.cpp)) \
 	\
 	libs/SDL/src/main/android/SDL_android_main.c
 

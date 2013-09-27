@@ -45,7 +45,7 @@ $(ANDROID_PROJECT)/local.properties:
 android-copy-assets:
 	@echo "===> CP [copy assets]"
 	$(Q)mkdir -p $(ANDROID_PROJECT)/assets
-	$(Q)cp -r $(BASEDIR) $(ANDROID_PROJECT)/assets
+	$(Q)cp -r data $(ANDROID_PROJECT)/assets
 
 .PHONY: android
 android: android-update-project android-copy-assets android-uninstall
