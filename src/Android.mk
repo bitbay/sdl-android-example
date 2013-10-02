@@ -16,7 +16,7 @@ LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/$(SDL_NET_PATH)/include
 
 # Add your application source files here...
-LOCAL_SRC_FILES := libs/SDL/main/android/SDL_android_main.c \
+LOCAL_SRC_FILES := libs/SDL/src/main/android/SDL_android_main.c \
 	$(subst $(LOCAL_PATH)/,,$(wildcard $(LOCAL_PATH)/*.cpp))
 
 LOCAL_SHARED_LIBRARIES := SDL2 SDL2_image SDL2_mixer SDL2_net
