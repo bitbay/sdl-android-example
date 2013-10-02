@@ -9,7 +9,7 @@ ifneq ($(findstring $(HOST_OS),sunos darwin),)
   TARGET_ARCH ?= $(shell uname -p | sed -e s/i.86/i386/)
 endif
 
-MODE        ?= debug
+DEBUG ?= 1
 
 ANDROID_PROJECT=android-project
 ifeq ($(DEBUG),)
@@ -33,12 +33,13 @@ android: android-update-project android-copy-assets android-uninstall
 	$(Q)cd $(ANDROID_PROJECT) && ant $(ANT_TARGET)
 	$(Q)cd $(ANDROID_PROJECT) && ant $(ANT_INSTALL_TARGET)
 
-.PHONY: clean-android
-clean-android:
+.PHONY: android-clean
+android-clean:
 	@echo "===> ANDROID [clean project]"
 	$(Q)rm -rf $(ANDROID_PROJECT)/assets
 	$(Q)rm -rf $(ANDROID_PROJECT)/bin
 	$(Q)rm -rf $(ANDROID_PROJECT)/obj
+	$(Q)rm -rf $(ANDROID_PROJECT)/libs
 	$(Q)rm -rf $(ANDROID_PROJECT)/gen
 	$(Q)rm -rf $(ANDROID_PROJECT)/local.properties
 
@@ -54,6 +55,7 @@ android-copy-assets:
 	@echo "===> CP [copy assets]"
 	$(Q)mkdir -p $(ANDROID_PROJECT)/assets
 	$(Q)cp -r data $(ANDROID_PROJECT)/assets
+	$(Q)for i in hdpi ldpi mdpi xhdpi; do mkdir -p $(ANDROID_PROJECT)/res/drawable-$${i}; cp data/icon.png $(ANDROID_PROJECT)/res/drawable-$${i}/icon.png; done
 
 android-backtrace:
 	adb logcat | ndk-stack -sym $(ANDROID_PROJECT)/obj/local/armeabi
